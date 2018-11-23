@@ -1,0 +1,52 @@
+package view;
+	
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+
+
+public class Main extends Application {
+	private static Scene sceneLogin,sceneHome;
+	private static Stage stage;
+	public final static String TELA_LOGIN = "login";
+	public final static String TELA_HOME = "home";
+
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			stage = primaryStage;
+			
+			Pane telaHome = FXMLLoader.load(getClass().getResource("TelaHome.fxml"));
+			Pane telaLogin = FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
+			
+			sceneLogin = new Scene(telaLogin);
+			sceneHome = new Scene(telaHome);
+			
+			mudarTela(TELA_LOGIN);
+			primaryStage.centerOnScreen();
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void  mudarTela(String tela) {
+		if(tela.equals("login")) {
+			stage.setResizable(false);
+			stage.setScene(sceneLogin);
+		}else {
+			stage.setResizable(true);
+			stage.setScene(sceneHome);
+		}
+		stage.centerOnScreen();
+		
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}

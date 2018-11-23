@@ -1,0 +1,26 @@
+package controller;
+
+import app.Main;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+
+public class ControleLogin{
+
+	@FXML
+	private TextField loginFiled;
+
+	@FXML
+	private TextField senhaField;
+
+	@FXML
+	private Button loginButton;
+
+	@FXML
+	void actionButton(ActionEvent event) {
+		//validar
+		//muda tela 
+		Main.mudarTelaHome();
+	}
+}

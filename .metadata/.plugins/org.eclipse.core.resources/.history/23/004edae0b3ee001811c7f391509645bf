@@ -1,0 +1,79 @@
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.util.Duration;
+import model.BaseDados;
+import model.Usuario;
+import view.Alerta;
+
+public class ControllerLogin implements Initializable {
+
+    @FXML
+    private TextField loginFld;
+
+    @FXML
+    private PasswordField senhaFld;
+
+    @FXML
+    private Button cadastroButton;
+
+    @FXML
+    private Button logarButton;
+    
+    private ParallelTransition parallel;
+    
+    @FXML
+    void actionHandler(ActionEvent e) {
+    	if(e.getSource() == logarButton) {
+    		parallel.play();
+    	}else if(e.getSource() == cadastroButton) {
+    		BaseDados.usuarios.add(new Usuario(loginFld.getText(), senhaFld.getText()));
+    		Alerta.getInstance().mostrarAlerta("Sucesso","Usuario cadastrado", AlertType.INFORMATION);
+    	}
+    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		parallel = new ParallelTransition(); // animações em paralelo
+		FadeTransition fade = new FadeTransition();
+		fade.setFromValue(1); // opacidade inicial - 1 = normal
+		fade.setToValue(0); // 0 = invisivel
+		fade.setDuration(new Duration(1000));
+		fade.setNode(logarButton);
+		
+		ScaleTransition scale = new ScaleTransition();
+		scale.setFromX(1); // 1 = scala normal
+		scale.setToX(4);// 4 = 4 vezes maior
+		scale.setFromY(1);
+		scale.setToY(4);
+		scale.setDuration(new Duration(100));
+		scale.setNode(logarButton);
+		
+		parallel.getChildren().add(fade); // adicionando animações 
+		parallel.getChildren().add(scale);
+		parallel.setAutoReverse(true); // reversivel
+		parallel.setCycleCount(2); // quantidade de siclos 2 = ida e volta
+		
+		parallel.setOnFinished(new EventHandler<ActionEvent>() { // evento associado ao final da animação
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+			}
+		});
+		
+	}
+
+}

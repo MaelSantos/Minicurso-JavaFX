@@ -1,0 +1,23 @@
+package controller;
+
+import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.Button;
+
+public class ControleHome {
+
+    @FXML
+    private Button cadastroButton;
+
+    @FXML
+    private Button consultasButton;
+
+    @FXML
+    private BarChart<?, ?> barChart;
+
+    @FXML
+    void actionHandler(ActionEvent event) {
+
+    }
+
+}

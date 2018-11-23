@@ -1,0 +1,38 @@
+package app;
+	
+import java.io.IOException;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+
+
+public class Main extends Application {
+	
+	private Pane login;
+	private Scene scene;
+	
+	@Override
+	public void start(Stage stage) {
+		
+		try {
+			
+			login = FXMLLoader.load(getClass().getClassLoader().getResource("aLogin.fxml"));
+			scene = new Scene(login);
+			stage.setScene(scene);
+			stage.show();
+			
+		} catch (IOException e) {
+			// TODO Bloco catch gerado automaticamente
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+}
